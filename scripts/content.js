@@ -91,35 +91,39 @@ window.addEventListener('load', () => {
         }
     }
 
-    function addCopyButtonToResult(answer, index) {
-        if (document.querySelector(`#result-copy-button-${index}`)) return;
-        const actionWrapper = document.querySelector(`#action-buttons-${index}`);
+function addCopyButtonToResult(answer, index) {
+  if (document.querySelector(`#result-copy-button-${index}`)) return;
+  const actionWrapper = document.querySelector(`#action-buttons-${index}`);
 
-        const actionButtonWrapper = Object.assign(document.createElement('div'), {
-            className: 'gpt-copyit gptc-action-buttons'
-        })
+  const actionButtonWrapper = Object.assign(document.createElement('div'), {
+    className: 'gpt-copyit gptc-action-buttons'
+  })
 
-        var elementText = () => answer.innerText.replace('Copy code', '');
+  var elementText = () => answer.innerText.replace('Copy code', '');
 
-        const copyButton = Object.assign(document.createElement('button'), {
-            id: `result-copy-button-${index}`,
-            className: 'gpt-copyit gptc-button',
-            textContent: 'Copy',
-            onclick: (e) => {
-                navigator.clipboard.writeText(elementText());
-                copyButton.textContent = "Copied!";
-                copyButton.style.backgroundColor = '#00FF00';
-                setTimeout(() => {
-                    copyButton.textContent = "Copy";
-                    copyButton.style.backgroundColor = '#343441';
-                }, 1500);
-            }
-        });
-        actionButtonWrapper.appendChild(copyButton);
-
-        actionWrapper.appendChild(actionButtonWrapper);
+  const copyButton = Object.assign(document.createElement('button'), {
+    id: `result-copy-button-${index}`,
+    className: 'gpt-copyit gptc-button',
+    textContent: 'Copy',
+    onclick: (e) => {
+      navigator.clipboard.writeText(elementText());
+      copyButton.textContent = "Copied!";
+      copyButton.style.backgroundColor = '#00FF00';
+      setTimeout(() => {
+        copyButton.textContent = "Copy";
+        copyButton.style.backgroundColor = '#343441';
+      }, 1500);
     }
-});
+  });
+
+  copyButton.style.fontSize = '12px'; // set font size to 12px
+  copyButton.style.padding = '4px 8px'; // set padding to 4px top/bottom and 8px left/right
+
+  actionButtonWrapper.appendChild(copyButton);
+
+  actionWrapper.appendChild(actionButtonWrapper);
+}
+
 
 function waitForElement(selector, callback, maxWaitTime = 5000, speed = 100, notFoundCallback = null) {
     const endTime = Date.now() + maxWaitTime;
