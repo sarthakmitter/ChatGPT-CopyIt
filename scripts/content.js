@@ -108,7 +108,7 @@ function addCopyButtonToResult(answer, index) {
     onclick: (e) => {
       navigator.clipboard.writeText(elementText());
       copyButton.textContent = "Copied!";
-      copyButton.style.backgroundColor = '#43b495';
+      copyButton.style.backgroundColor = '#00A67E';
       setTimeout(() => {
         copyButton.textContent = "Copy";
         copyButton.style.backgroundColor = '#343441';
